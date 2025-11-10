@@ -4,7 +4,7 @@ pipeline {
     environment {
         TOMCAT_IP = '172.31.14.230'
         TOMCAT_USER = 'rahul'
-        TOMCAT_PASS = credentials('tomcat-manager'
+        TOMCAT_PASS = credentials('tomcat-manager')
         APP_NAME = 'myapp'
         REPO = 'https://github.com/Rahuld6/jenkins_pipeline.git'
     }
