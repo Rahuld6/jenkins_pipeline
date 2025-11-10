@@ -2,17 +2,17 @@ pipeline {
     agent any
 
     environment {
-        TOMCAT_IP = '172.31.14.230'                 // Private IP of Tomcat server
-        TOMCAT_USER = 'tomcat'                      // Tomcat Manager user
-        TOMCAT_PASS = credentials('tomcat-manager') // Jenkins credential ID for Tomcat password
-        APP_NAME = 'myapp'                          // Name of your app
+        TOMCAT_IP = '172.31.14.230'
+        TOMCAT_USER = 'rahul'
+        TOMCAT_PASS = credentials('tomcat-manager'
+        APP_NAME = 'myapp'
+        REPO = 'https://github.com/Rahuld6/jenkins_pipeline.git'
     }
 
     stages {
         stage('Checkout') {
             steps {
-                // Clone your repo from main branch
-                git branch: 'main', url: 'https://github.com/Rahuld6/jenkins_pipeline.git'
+                git branch: 'main', url: "${REPO}"
             }
         }
 
@@ -25,7 +25,6 @@ pipeline {
         stage('Deploy to Tomcat') {
             steps {
                 sshagent(['tomcat-ssh']) {
-                    // Upload WAR to Tomcat server
                     sh """
                         scp -o StrictHostKeyChecking=no target/${APP_NAME}.war ec2-user@${TOMCAT_IP}:/tmp/${APP_NAME}.war
                     """
