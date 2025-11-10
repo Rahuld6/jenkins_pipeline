@@ -2,16 +2,16 @@ pipeline {
     agent any
 
     environment {
-        TOMCAT_IP = '172.31.14.230'               // Private IP of Tomcat server
-        TOMCAT_USER = 'tomcat'                    // Tomcat Manager user
-        TOMCAT_PASS = credentials('tomcat-manager') // Jenkins credential ID for password
-        APP_NAME = 'myapp'                        // Name of your app
+        TOMCAT_IP = '172.31.14.230'                 // Private IP of Tomcat server
+        TOMCAT_USER = 'tomcat'                      // Tomcat Manager user
+        TOMCAT_PASS = credentials('tomcat-manager') // Jenkins credential ID for Tomcat password
+        APP_NAME = 'myapp'                          // Name of your app
     }
 
     stages {
         stage('Checkout') {
             steps {
-                // Clone the repo with the Jenkinsfile and project code
+                // Clone your repo from main branch
                 git branch: 'main', url: 'https://github.com/Rahuld6/jenkins_pipeline.git'
             }
         }
